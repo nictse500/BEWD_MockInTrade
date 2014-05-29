@@ -1,0 +1,16 @@
+<%= form_for([:event, @order]) do |f| %>
+
+  <div class="field">
+  	<%= f.label :price %><br>
+  	<%= f.number_field :price, min: 0, max: 10, step: 0.05, required: true %>
+  </div>
+  <div class="field">
+  	<%= f.label :shares %><br>
+  	<%= f.number_field :shares, min: 0, required: true %>
+  </div>
+  <%= f.hidden_field :type, value: params[:type] %>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<%end %>
+<%= link_to "Cancel", :back %>

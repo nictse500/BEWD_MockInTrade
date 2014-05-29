@@ -1,0 +1,32 @@
+<%= @event.name %>
+<table cellpadding="5">
+  <tbody>
+  	<tr>
+      <td align = "center" colspan = 3><%= link_to 'Sell Shares',  new_event_order_path(@event, type: "sell")  %></td>
+      <td align = "center" colspan = 3><%= link_to 'Buy Shares', new_event_order_path(@event, type: "buy") %></td>
+  	</tr>
+  	<tr>
+  	  <td align = "center" colspan = 3> Ask </td>
+  	  <td align = "center" colspan = 3> Bid </td>
+    </tr>
+  	<% @orders.each do |order| %>
+  	  <% if order.filled == order.shares then next end %> 
+  	  <% if order.type == "sell" %>
+  	    <tr>
+  	  	  <td>$<%= order.price %></td>
+  	  	  <td> x </td>
+  	  	  <td><%= order.shares - order.filled %></td>
+  	  	  <td colspan = 3></td>
+  	    </tr>
+  	  <% else %>
+  	    <tr>
+  	      <td colspan = 3></td>
+  	  	  <td>$<%= order.price %></td>
+  	  	  <td> x </td>
+  	  	  <td><%= order.shares - order.filled %></td>
+  	    </tr>
+  	  <% end %>
+  	<% end %>
+  </tbody>
+</table>
+<br><%= link_to "All Events", events_path %> <%= link_to "My Orders", user_orders_path(current_user) %>

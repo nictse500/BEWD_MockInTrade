@@ -1,0 +1,14 @@
+<table>
+  <tbody>
+  	  <tr>
+        <td><%= @order.type.capitalize %> <%= @order.event.name %> <%= @order.shares %> @ <%= @order.price%></td>
+      </tr>
+      <% if @order.filled > 0 %>
+      <tr>
+      	<td><%= @order.filled %> shares were filled </td>
+      </tr>
+      <% end %>
+  </tbody>
+</table>
+<%= link_to "Back to event", event_path(@order.event) %> <p>
+<%= link_to "All Events", events_path %> <%= link_to "My Orders", user_orders_path(current_user) %>

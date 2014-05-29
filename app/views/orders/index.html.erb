@@ -1,0 +1,28 @@
+<table>
+  <tbody>
+
+  	<tr><td colspan = 5> Open Orders </td></tr>
+  	<% @orders.select{|x| x.filled != x.shares}.each do |order| %>
+  	  <tr>
+        <td><%= link_to order.event.name, event_path(order.event) %></td>
+        <td><%= order.type.capitalize %></td>
+        <td><%= order.shares %> Shares </td>
+        <td>@ $<%= order.price %></td>
+        <td>(<%= order.filled %> Shares Filled)</td>
+      </tr>
+    <% end %>
+
+    <tr><td colspan = 5> Completed Orders </td></tr>
+  	<% @orders.select{|x| x.filled == x.shares}.each do |order| %>
+  	  <tr>
+        <td><%= link_to order.event.name, event_path(order.event) %></td>
+        <td><%= order.type.capitalize %></td>
+        <td><%= order.shares %> Shares </td>
+        <td>@ $<%= order.price %></td>
+        <td></td>
+      </tr>
+    <% end %>
+
+  </tbody>
+</table>
+<br><%= link_to "All Events", events_path %>

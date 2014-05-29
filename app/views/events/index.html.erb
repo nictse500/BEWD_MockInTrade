@@ -1,0 +1,20 @@
+<table cellpadding = "5">
+  <tbody>
+  	  <tr>
+  	  	<td align = 'center'> Event </td>
+  	  	<td align = 'center'> Bid </td>
+  	  	<td align = 'center'> / </td>
+  	  	<td align = 'center'> Ask </td>
+  	  	<td align = 'center' colspan = 2> Actions </td>
+  	<% @events.each do |event| %>
+  	  <tr>
+        <td><%= link_to event.name, event_path(event) %></td>
+            <% bidask = @bidask.select{|x| x[:event_id] == event.id}.first %>
+        <td><%= bidask[:bid] %></td><td> / </td><td><%= bidask[:ask] %></td>
+        <td><%= link_to 'Sell', new_event_order_path(event, type: "sell") %></td>
+        <td><%= link_to 'Buy',  new_event_order_path(event, type: "buy")  %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br><%= link_to "My Orders", user_orders_path(current_user) %>
